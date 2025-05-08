@@ -18,7 +18,6 @@ export function useToggleSalleSub(
     error: SalleError,
   } = useFetchSalleById(salleid);
 
-  // Fetch initial subscription status
   useEffect(() => {
     const checkSubscription = async () => {
       if (!userid || !salleid) return;
@@ -49,7 +48,6 @@ export function useToggleSalleSub(
     checkSubscription();
   }, [userid, salleid]);
 
-  // Toggle join/unjoin
   const toggleJoin = async () => {
     if (!userid || !salleid) {
       setError("User or salle ID missing");
@@ -61,30 +59,44 @@ export function useToggleSalleSub(
 
     try {
       if (joined) {
-        // Unjoin process
-        const { error } = await supabase
+        // 1. Unsubscribe from the salle
+        const { error: salleUnsubError } = await supabase
           .from("sallesubs")
           .delete()
           .eq("userid", userid)
           .eq("salleid", salleid);
 
-        if (error) throw error;
+        if (salleUnsubError) throw salleUnsubError;
 
-        if (SalleLoading) {
-          await new Promise((resolve) => setTimeout(resolve, 200));
+        // 2. Get all sport IDs where SalleID = salleid
+        const { data: sportsInSalle, error: sportFetchError } = await supabase
+          .from("Sports")
+          .select("id")
+          .eq("SalleID", salleid);
+
+        if (sportFetchError) throw sportFetchError;
+
+        const sportIds = sportsInSalle?.map((sport) => sport.id);
+        if (sportIds.length > 0) {
+          // 3. Unsubscribe from all sportsubs for these sport IDs
+          const { error: sportSubDeleteError } = await supabase
+            .from("sportsubs")
+            .delete()
+            .in("sportid", sportIds)
+            .eq("userid", userid);
+
+          if (sportSubDeleteError) throw sportSubDeleteError;
         }
 
-        if (!salle) {
-          throw new Error("Salle information not available");
-        }
+        if (!salle) throw new Error("Salle information not available");
 
         await sendNotification({
           title: `Unjoined from ${salle.title}`,
           type: "destructive",
-          message: "You've left this salle and will no longer receive updates",
+          message: "You've left this salle and all related sports.",
         });
 
-        toast.success(`Left ${salle.title}`);
+        toast.success(`Left ${salle.title} and all related sports`);
         setJoined(false);
       } else {
         // Join process
@@ -94,18 +106,12 @@ export function useToggleSalleSub(
 
         if (error) throw error;
 
-        if (SalleLoading) {
-          await new Promise((resolve) => setTimeout(resolve, 200));
-        }
-
-        if (!salle) {
-          throw new Error("Salle information not available");
-        }
+        if (!salle) throw new Error("Salle information not available");
 
         await sendNotification({
           title: `Joined ${salle.title}`,
           type: "primary",
-          message: `Welcome to ${salle.title}! You'll now receive updates.`,
+          message: `Welcome to ${salle.title}! You're now subscribed.`,
         });
 
         toast.success(`Joined ${salle.title}`);
@@ -126,6 +132,6 @@ export function useToggleSalleSub(
     toggleJoin: salle ? toggleJoin : undefined,
     loading: loading || SalleLoading,
     error: error || SalleError,
-    salle, // Optional: expose salle data if needed by the component
+    salle,
   };
 }
