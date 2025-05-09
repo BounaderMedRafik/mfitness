@@ -180,7 +180,7 @@ const SingularSallePageContent = ({
             <p className="text-gray-100">{branch.coordinations}</p>
           </div>
 
-          <div className="">
+          <div className="relative w-full h-0 pb-[56.25%]">
             <iframe
               src={branch.googleloc}
               width="600"
@@ -188,7 +188,7 @@ const SingularSallePageContent = ({
               allowFullScreen={true}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className=" h-44 object-cover"
+              className="absolute top-0 left-0 w-full h-full object-cover md:h-44"
             ></iframe>
           </div>
         </div>

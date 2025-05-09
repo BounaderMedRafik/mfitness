@@ -23,13 +23,12 @@ export default function LandingPage() {
   return (
     <div className="text-white">
       {/* Header */}
-      <div className=" bg-gradient-to-b from-black/80 to-black/90">
-        <header className="  max-w-6xl mx-auto  py-3">
+      <div className="bg-gradient-to-b from-black/80 to-black/90 px-3 md:p-0">
+        <header className="max-w-6xl mx-auto py-3">
           <div className="container flex justify-between items-center">
             <div className="text-2xl font-bold">
               <span className="text-blue-400">M</span>Fitness
             </div>
-
             <nav className="hidden md:block">
               <ul className="flex space-x-8 font-bold">
                 {navLinks.map((link) => (
@@ -44,24 +43,6 @@ export default function LandingPage() {
                 ))}
               </ul>
             </nav>
-
-            <button className="md:hidden border p-1 rounded">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-              </svg>
-            </button>
           </div>
         </header>
       </div>
@@ -69,27 +50,29 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section
         id="home"
-        className="min-h-screen flex items-center bg-[url('https://i0.wp.com/www.strengthlog.com/wp-content/uploads/2023/04/Beginner-Deadlift-Workout.jpg?fit=1894%2C1337&ssl=1')] bg-cover bg-top bg-no-repeat relative before:absolute before:inset-0 before:bg-black/20"
+        className="min-h-screen p-4 py-12 md:p-0 flex items-center bg-[url('https://i0.wp.com/www.strengthlog.com/wp-content/uploads/2023/04/Beginner-Deadlift-Workout.jpg?fit=1894%2C1337&ssl=1')] bg-cover bg-top bg-no-repeat relative before:absolute before:inset-0 before:bg-black/20"
       >
         <div className="container relative z-10 max-w-6xl">
           <h1 className="text-4xl md:text-5xl font-bold uppercase mb-6">
             MFitness – Lieu pour vos objectifs de fitness
           </h1>
           <p className="text-lg mb-8">
-            We Offer Functional Training, Plyometric Boxes, Aerobics classes,
-            TRX And Much More.
+            Nous offrons des entraînements fonctionnels, des boîtes de
+            plyométrie, des cours d'aérobic, du TRX et bien plus encore.
           </p>
-          <Button
-            variant="outline"
-            className="bg-transparent text-white border-blue-400 hover:bg-blue-400 hover:text-black"
-          >
-            Our services
-          </Button>
+          <a href={"#about"}>
+            <Button
+              variant="outline"
+              className="bg-transparent text-white border-blue-400 hover:bg-blue-400 hover:text-black"
+            >
+              Nos services
+            </Button>
+          </a>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-16 bg-gray-900">
+      <section id="about" className="md:py-16 bg-gray-900 p-4 py-12 ">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
           <div>
             <h2 className="text-3xl font-bold uppercase mb-6 relative after:absolute after:bottom-0 after:left-0 after:w-20 after:h-0.5 after:bg-blue-400 pb-2">
@@ -97,12 +80,7 @@ export default function LandingPage() {
             </h2>
             <p className="text-gray-300">
               MFitness est votre destination idéale pour atteindre vos objectifs
-              de santé et de forme. Nous offrons un environnement encourageant
-              et soutenant qui vous aide à devenir la meilleure version de
-              vous-même. En mettant l'accent sur le développement de vos
-              compétences et l'amélioration de votre condition physique, nous
-              sommes là pour vous accompagner à chaque étape de votre parcours
-              vers une meilleure santé et un mode de vie actif.
+              de santé et de forme...
             </p>
           </div>
 
@@ -110,24 +88,24 @@ export default function LandingPage() {
             <img
               src="https://www.eliteprofitca.com/wp-content/uploads/2020/12/IMG_9030-scaled.jpg"
               alt="about-image-one"
-              className="w-full h-auto rounded  outline-2 outline-offset-4 outline-gray-600"
+              className="w-full h-auto rounded outline-2 outline-offset-4 outline-gray-600"
             />
             <img
               src="https://gymcrafter.com/wp-content/uploads/2017/11/dumbbells-1474426_1920.jpg"
               alt="about-image-two"
-              className="w-full h-auto rounded  outline-2 outline-offset-4 outline-gray-600"
+              className="w-full h-auto rounded outline-2 outline-offset-4 outline-gray-600"
             />
             <img
               src="https://cdn.shopify.com/s/files/1/0471/3332/7519/files/10-best-and-worst-cardio-machines-v2-10.jpg?v=1730755039"
               alt="about-image-three"
-              className="col-span-2 w-3/4 -mt-36 mx-auto rounded  outline-4 outline-offset-4 outline-blue-400"
+              className="col-span-2 w-3/4 -mt-36 mx-auto rounded outline-4 outline-offset-4 outline-blue-400"
             />
           </div>
         </div>
       </section>
 
       {/* Branches Section */}
-      <section id="branches" className="py-16 bg-black">
+      <section id="branches" className="md:py-16 bg-black p-4 py-12 ">
         <div className="container">
           <h2 className="text-3xl font-bold uppercase text-center mb-12 relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-20 after:h-0.5 after:bg-blue-400 pb-2">
             Les branches disponibles
@@ -158,7 +136,7 @@ export default function LandingPage() {
                     </div>
                   </div>
                 </div>
-                <div className="absolute top-0 left-0 w-3/4 bg-gradient-to-r from-blue-400 to-blue-200 text-black px-4 py-2 clip-path-branch">
+                <div className="absolute top-0 left-0 w-3/4 bg-gradient-to-r from-blue-400 to-blue-200 text-black p-4 py-12 py-2 clip-path-branch">
                   {branch.title}
                 </div>
               </Card>
@@ -177,19 +155,18 @@ export default function LandingPage() {
             </h2>
             <p className="text-gray-300 mb-8">
               🔥 Promo exclusive : abonnement 12 mois = payez seulement 10 !
-              Deux mois gratuits pour toute souscription annuelle.
             </p>
             <Button className="bg-blue-400 hover:bg-blue-500 text-black">
               En savoir plus👉
             </Button>
           </div>
 
-          <div className=" h-full absolute top-0 right-0 z-40 w-1/3 bg-[url('https://d1heoihvzm7u4h.cloudfront.net/7680c65526397ce129e200d2823c34fe51e988d0_November_banner_27.jpg')] bg-cover bg-center brightness-110"></div>
+          <div className="h-full absolute top-0 right-0 z-40 w-full md:w-1/3 bg-[url('https://d1heoihvzm7u4h.cloudfront.net/7680c65526397ce129e200d2823c34fe51e988d0_November_banner_27.jpg')] bg-cover bg-center brightness-110"></div>
         </div>
       </section>
 
       {/* Trainers Section */}
-      <section id="trainers" className="py-16 bg-black">
+      <section id="trainers" className="md:py-16 bg-black p-4 py-12 ">
         <div className="container">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="text-3xl font-bold uppercase mb-4 relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-20 after:h-0.5 after:bg-blue-400 pb-2">
@@ -219,25 +196,25 @@ export default function LandingPage() {
                       target="_blank"
                       className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     >
-                      <Facebook className=" text-white" size={30} />
+                      <Facebook className="text-white" size={30} />
                     </a>
                     <a
                       href={trainer.socials.insta}
                       target="_blank"
                       className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     >
-                      <Instagram className=" text-white" size={30} />
+                      <Instagram className="text-white" size={30} />
                     </a>
                     <a
                       target="_blank"
                       href={trainer.socials.twitter}
                       className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     >
-                      <Twitter className=" text-white" size={30} />
+                      <Twitter className="text-white" size={30} />
                     </a>
                   </div>
                 </div>
-                <div className="absolute bottom-0 left-0 w-3/4 bg-gradient-to-r from-blue-400 to-blue-200 text-black px-4 py-2 clip-path-branch">
+                <div className="absolute bottom-0 left-0 w-3/4 bg-gradient-to-r from-blue-400 to-blue-200 text-black p-4 py-12 py-2 clip-path-branch">
                   <p className="font-bold uppercase text-blue-800">
                     {trainer.name}
                   </p>
@@ -256,7 +233,7 @@ export default function LandingPage() {
             Quelques commentaires
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-12  max-w-2xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 max-w-2xl mx-auto">
             {reviews.map((review) => (
               <Card
                 key={review.id}
@@ -301,8 +278,8 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-16 bg-black">
-        <div className="max-w-2xl mx-auto grid md:grid-cols-2 gap-12">
+      <footer className="md:py-16 bg-black p-4 py-12 ">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
             <h2 className="text-2xl font-bold mb-6">
               <span className="text-blue-400">M</span>Fitness
@@ -328,7 +305,7 @@ export default function LandingPage() {
                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                   ></path>
                 </svg>
-                100 Nallin Street, New Youk
+                100 Nallin Street, New York
               </li>
               <li className="flex items-center">
                 <svg
@@ -377,11 +354,11 @@ export default function LandingPage() {
             </ul>
           </div>
 
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-start justify-start">
             <h3 className="text-xl font-bold mb-6">Quick Links</h3>
             <ul className="space-y-3 flex items-center justify-center flex-col">
               {navLinks.map((link) => (
-                <li key={link.name} className=" w-fit">
+                <li key={link.name} className="w-full md:w-fit">
                   <a
                     href={link.href}
                     className="flex items-center hover:text-blue-400 transition-colors"

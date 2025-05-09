@@ -1,7 +1,9 @@
 "use client";
+
+import { NotificationPayload } from "@/consts/core-data";
+import { useFetchNotifications } from "@/hooks/useFetchNotifications";
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import {
-  AlertCircle,
   ArrowUpRight,
   Bell,
   CheckCircle2,
@@ -12,22 +14,22 @@ import {
   User,
   XCircle,
 } from "lucide-react";
+import moment from "moment";
 import Link from "next/link";
+import { useState } from "react";
 import { Button, buttonVariants } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { useState } from "react";
-import moment from "moment";
-import { useFetchNotifications } from "@/hooks/useFetchNotifications";
-import { NotificationPayload } from "@/consts/core-data";
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "../ui/dropdown-menu"; // Import necessary components
 
 const Navigation = () => {
   return (
-    <div className=" bg-gradient-to-b from-black/80 to-black/90 text-white">
-      <header className="  max-w-6xl mx-auto  py-3">
+    <div className="bg-gradient-to-b from-black/80 to-black/90 text-white px-3 md:px-0">
+      <header className="max-w-6xl mx-auto py-3">
         <div className="container flex justify-between items-center">
           <Link href={"/"}>
             <div className="text-2xl font-bold">
@@ -49,7 +51,7 @@ const Navigation = () => {
                     size: "sm",
                   })}
                 >
-                  <div>Mes Plans</div>
+                  <div>Salle</div>
                   <div>
                     <ArrowUpRight size={13} />
                   </div>
@@ -76,9 +78,9 @@ const Navigation = () => {
                     <Button
                       size={"sm"}
                       variant={"secondary"}
-                      className=" cursor-pointer"
+                      className="cursor-pointer"
                     >
-                      <div>Log out</div>
+                      <div>Se déconnecter</div>
                       <div>
                         <LogOut size={13} />
                       </div>
@@ -89,12 +91,61 @@ const Navigation = () => {
             </ul>
           </nav>
 
-          {/* //button of expand */}
-          <button className="md:hidden border p-1 rounded">
-            <Menu size={14} />
-          </button>
+          {/* Menu Button for mobile */}
+          <MenuButton />
         </div>
       </header>
+    </div>
+  );
+};
+
+const MenuButton = () => {
+  return (
+    <div className="flex items-center gap-2">
+      <NotificationButton />
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild className="block md:hidden">
+          <Button
+            size="icon"
+            variant="secondary"
+            className="flex items-center justify-center"
+          >
+            <Menu size={16} />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-72 p-2 space-y-2 shadow-xl rounded-xl">
+          <DropdownMenuItem>
+            <Link href={"/"} className="flex items-center space-x-2">
+              <ArrowUpRight size={16} />
+              <span>Salle</span>
+            </Link>
+          </DropdownMenuItem>
+
+          <DropdownMenuItem>
+            <Link href={"/profile"} className="flex items-center space-x-2">
+              <User size={16} />
+              <span>Profile</span>
+            </Link>
+          </DropdownMenuItem>
+
+          <DropdownMenuSeparator />
+
+          <DropdownMenuItem>
+            <SignOutButton>
+              <Button
+                size={"sm"}
+                variant={"secondary"}
+                className="cursor-pointer"
+              >
+                <div>Se déconnecter</div>
+                <div>
+                  <LogOut size={13} />
+                </div>
+              </Button>
+            </SignOutButton>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 };

@@ -39,7 +39,7 @@ const AllTheSalles = () => {
       <div className="container mx-auto px-4 py-8 text-center">
         <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-2xl mx-auto">
           <h2 className="text-xl font-semibold text-red-600 mb-2">
-            Error Loading Branches
+            Erreur de chargement des branches
           </h2>
           <p className="text-red-500 mb-4">{error}</p>
           <Button
@@ -47,7 +47,7 @@ const AllTheSalles = () => {
             onClick={() => window.location.reload()}
             className="text-red-600 border-red-300 hover:bg-red-50"
           >
-            Try Again
+            Réessayer
           </Button>
         </div>
       </div>
@@ -58,10 +58,11 @@ const AllTheSalles = () => {
     <div className="bg-gradient-to-b from-black/80 to-black/90 text-white">
       <div className="container mx-auto px-4 py-8 ">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Our Branches</h1>
+          <h1 className="text-4xl font-bold mb-4">Nos Branches</h1>
           <p className="text-lg text-gray-200 max-w-2xl mx-auto">
-            Discover our premium fitness centers across the region, each
-            offering unique facilities and training programs.
+            Découvrez nos centres de fitness haut de gamme à travers la région,
+            chacun offrant des installations uniques et des programmes
+            d'entraînement.
           </p>
         </div>
 
@@ -105,7 +106,7 @@ const AllTheSalles = () => {
                   </div>
                   <div className="absolute bottom-4 left-4">
                     <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                      Featured
+                      En vedette
                     </span>
                   </div>
                 </div>
@@ -141,7 +142,7 @@ const AllTheSalles = () => {
                   </div>
                   <Link href={`/salle/${branch.id}`} passHref>
                     <Button className="w-full" variant="outline">
-                      View Details
+                      Afficher les détails
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-4 w-4 ml-2"

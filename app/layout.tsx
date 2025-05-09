@@ -5,6 +5,7 @@ import { ClerkProvider, SignedIn, SignedOut } from "@clerk/nextjs";
 import LandingPage from "@/components/core/LandingPage";
 import Navigation from "@/components/layout/Navigation";
 import { Toaster } from "@/components/ui/sonner";
+import { RandomSportNotifier } from "@/hooks/useSportNotifier";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,10 +39,12 @@ export default function RootLayout({
           </SignedOut>
 
           <SignedIn>
-            <div className=" w-full">
-              <Navigation />
-            </div>
-            {children}
+            <RandomSportNotifier>
+              <div className=" w-full">
+                <Navigation />
+              </div>
+              {children}
+            </RandomSportNotifier>
           </SignedIn>
         </body>
       </html>
