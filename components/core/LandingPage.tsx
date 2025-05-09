@@ -6,11 +6,17 @@ import { Input } from "@/components/ui/input";
 import { navLinks, reviews, trainers } from "@/consts/core-data";
 import { useBranches } from "@/hooks/useFetchSalles";
 import { SignIn, SignUp } from "@clerk/nextjs";
-import { Facebook, Instagram, Signal, Twitter } from "lucide-react";
+import { Facebook, Instagram, Menu, Signal, Twitter } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Dialog, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { DialogContent } from "@radix-ui/react-dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
 export default function LandingPage() {
   const [isLoginActive, setIsLoginActive] = useState(true);
@@ -26,9 +32,12 @@ export default function LandingPage() {
       <div className="bg-gradient-to-b from-black/80 to-black/90 px-3 md:p-0">
         <header className="max-w-6xl mx-auto py-3">
           <div className="container flex justify-between items-center">
-            <div className="text-2xl font-bold">
+            {/* Logo */}
+            <div className="text-2xl font-bold text-white">
               <span className="text-blue-400">M</span>Fitness
             </div>
+
+            {/* Desktop Nav */}
             <nav className="hidden md:block">
               <ul className="flex space-x-8 font-bold">
                 {navLinks.map((link) => (
@@ -43,6 +52,27 @@ export default function LandingPage() {
                 ))}
               </ul>
             </nav>
+
+            {/* Mobile Dropdown */}
+            <div className="md:hidden text-white">
+              <DropdownMenu>
+                <DropdownMenuTrigger className="focus:outline-none">
+                  <Menu size={28} />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-black border border-white/10 text-white w-48 mt-2">
+                  {navLinks.map((link) => (
+                    <DropdownMenuItem key={link.name} asChild>
+                      <a
+                        href={link.href}
+                        className="block w-full px-2 py-1.5 hover:text-blue-400 transition-colors"
+                      >
+                        {link.name}
+                      </a>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
         </header>
       </div>
@@ -112,7 +142,7 @@ export default function LandingPage() {
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {branches.slice(0, 3).map((branch) => (
+            {branches.map((branch) => (
               <Card
                 key={branch.id}
                 className="relative overflow-hidden group border-blue-400 border-l-2 p-0"

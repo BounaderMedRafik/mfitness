@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import supabase from "@/lib/supabase";
 import { toast } from "sonner";
-import { useNotifyUser } from "./useNotifyUser";
 import { useFetchSalleById } from "./useFetchSalleById";
+import { useNotifyUser } from "./useNotifyUser";
 
 export function useToggleSalleSub(
   userid: string | undefined,
