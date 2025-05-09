@@ -34,9 +34,9 @@ export default function RootLayout({
         >
           <Toaster />
           <SignedOut>
-            {" "}
             <LandingPage />
           </SignedOut>
+
           <SignedIn>
             <div className=" w-full">
               <Navigation />
