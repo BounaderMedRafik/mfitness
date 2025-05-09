@@ -4,6 +4,7 @@ export interface Salle {
   image: string | null;
   description: string | null;
   coordinations: string | null;
+  googleloc: string;
 }
 
 export interface Sport {
@@ -115,12 +116,11 @@ export const reviews: Review[] = [
       "https://lig-membres.imag.fr/amery/wp-content/uploads/sites/148/2024/10/Sihem2024.jpg",
   },
 ];
-
 export const navLinks = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
+  { name: "Accueil", href: "#home" },
+  { name: "À propos", href: "#about" },
   { name: "Les branches disponibles", href: "#branches" },
-  { name: "offer", href: "#offer" },
-  { name: "Trainers", href: "#trainers" },
+  { name: "Offre", href: "#offer" },
+  { name: "Formateurs", href: "#trainers" },
   { name: "Contact", href: "#contact" },
 ];

@@ -289,12 +289,20 @@ export default function LandingPage() {
         id="contact"
         className="py-16 bg-black flex items-center justify-center"
       >
-        <SignIn routing="hash" />
+        <SignIn
+          routing="hash"
+          appearance={{
+            variables: {
+              colorBackground: "black",
+              colorText: "white",
+            },
+          }}
+        />
       </section>
 
       {/* Footer */}
       <footer className="py-16 bg-black">
-        <div className="container grid md:grid-cols-3 gap-12">
+        <div className="max-w-2xl mx-auto grid md:grid-cols-2 gap-12">
           <div>
             <h2 className="text-2xl font-bold mb-6">
               <span className="text-blue-400">M</span>Fitness
@@ -369,11 +377,11 @@ export default function LandingPage() {
             </ul>
           </div>
 
-          <div>
+          <div className="flex flex-col items-center justify-center">
             <h3 className="text-xl font-bold mb-6">Quick Links</h3>
-            <ul className="space-y-3">
+            <ul className="space-y-3 flex items-center justify-center flex-col">
               {navLinks.map((link) => (
-                <li key={link.name}>
+                <li key={link.name} className=" w-fit">
                   <a
                     href={link.href}
                     className="flex items-center hover:text-blue-400 transition-colors"
@@ -396,37 +404,6 @@ export default function LandingPage() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-bold mb-6">News Letter</h3>
-            <p className="text-gray-400 mb-6">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Laudantium, nisi!
-            </p>
-            <div className="flex">
-              <Input
-                type="email"
-                placeholder="example@domine.com"
-                className="bg-gray-800 border-gray-700 text-white flex-1 rounded-r-none focus-visible:ring-0 focus-visible:ring-offset-0"
-              />
-              <Button className="bg-blue-400 hover:bg-blue-500 text-black rounded-l-none px-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="22" y1="2" x2="11" y2="13"></line>
-                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                </svg>
-              </Button>
-            </div>
           </div>
         </div>
       </footer>

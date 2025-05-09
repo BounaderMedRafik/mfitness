@@ -179,6 +179,18 @@ const SingularSallePageContent = ({
             <h2 className="text-lg font-semibold mb-2">Location</h2>
             <p className="text-gray-100">{branch.coordinations}</p>
           </div>
+
+          <div className="">
+            <iframe
+              src={branch.googleloc}
+              width="600"
+              height="450"
+              allowFullScreen={true}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className=" h-44 object-cover"
+            ></iframe>
+          </div>
         </div>
 
         {/* Confirmation Dialog */}
