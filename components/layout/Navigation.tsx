@@ -101,10 +101,10 @@ const Navigation = () => {
 
 const MenuButton = () => {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2  md:hidden">
       <NotificationButton />
       <DropdownMenu>
-        <DropdownMenuTrigger asChild className="block md:hidden">
+        <DropdownMenuTrigger asChild className="">
           <Button
             size="icon"
             variant="secondary"
