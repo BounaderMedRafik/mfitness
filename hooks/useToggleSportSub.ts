@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import supabase from "@/lib/supabase";
 import { toast } from "sonner";
-import { useNotifyUser } from "./useNotifyUser";
 import { useFetchSportById } from "./useFetchSportById";
+import { useNotifyUser } from "./useNotifyUser";
 
 export function useToggleSportSub(
   userid: string | undefined,

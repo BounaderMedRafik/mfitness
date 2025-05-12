@@ -6,7 +6,7 @@ import { Salle, Sport } from "@/consts/core-data";
 import { useBranches } from "@/hooks/useFetchSalles";
 import { useToggleSalleSub } from "@/hooks/useToggleSalleSub";
 import supabase from "@/lib/supabase";
-import { useUser } from "@clerk/nextjs";
+import { SignedIn, useUser } from "@clerk/nextjs";
 import {
   ArrowLeftIcon,
   ArrowRight,
@@ -36,9 +36,9 @@ const SingularSallePageContent = ({
   salleId,
 }: SingularSallePageContentProps) => {
   const router = useRouter();
-  const { branches, fetchSportsForSalle } = useBranches();
-  const [sports, setSports] = useState<Sport[]>([]);
+  const { branches, fetchSportsForSalle, allsports } = useBranches();
   const [loadingSports, setLoadingSports] = useState(true);
+
   const [branch, setBranch] = useState<Salle | null>(null);
   const [loadingBranch, setLoadingBranch] = useState(true);
   const { user } = useUser();
@@ -71,8 +71,6 @@ const SingularSallePageContent = ({
         }
 
         // Load sports
-        const sportsData = await fetchSportsForSalle(salleId);
-        setSports(sportsData);
       } catch (error) {
         console.error("Error loading salle data:", error);
       } finally {
@@ -234,7 +232,7 @@ const SingularSallePageContent = ({
               </Card>
             ))}
           </div>
-        ) : sports.length === 0 ? (
+        ) : allsports.length === 0 ? (
           <div className="text-center py-12 bg-gray-50 rounded-lg">
             <p className="text-gray-500 mb-4">
               No sports currently available at this location
@@ -245,7 +243,7 @@ const SingularSallePageContent = ({
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sports.map((sport, i) => (
+            {allsports.map((sport, i) => (
               <SportCard key={i} {...sport} />
             ))}
           </div>
@@ -253,21 +251,23 @@ const SingularSallePageContent = ({
       </section>
 
       {/* Back Button */}
-      {!joined && (
-        <div className="flex justify-start max-w-6xl mx-auto mt-8 text-black">
-          <Button variant="outline" asChild>
-            <Link href="/" className="flex items-center gap-2">
-              <ArrowLeftIcon className="h-4 w-4" />
-              Back to all branches
-            </Link>
-          </Button>
-        </div>
-      )}
+      <SignedIn>
+        {!joined && (
+          <div className="flex justify-start max-w-6xl mx-auto mt-8 text-black">
+            <Button variant="outline" asChild>
+              <Link href="/" className="flex items-center gap-2">
+                <ArrowLeftIcon className="h-4 w-4" />
+                Back to all branches
+              </Link>
+            </Button>
+          </div>
+        )}
+      </SignedIn>
     </>
   );
 };
 
-const SportCard: FC<Sport> = ({
+export const SportCard: FC<Sport> = ({
   id,
   image,
   title,

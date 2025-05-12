@@ -1,31 +1,21 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { navLinks, reviews, trainers } from "@/consts/core-data";
 import { useBranches } from "@/hooks/useFetchSalles";
-import { SignIn, SignUp } from "@clerk/nextjs";
+import { SignIn } from "@clerk/nextjs";
 import { Facebook, Instagram, Menu, Signal, Twitter } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
-import { Dialog, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
-import { DialogContent } from "@radix-ui/react-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { SportCard } from "./SingularSallePageContent";
 
 export default function LandingPage() {
-  const [isLoginActive, setIsLoginActive] = useState(true);
-  const { branches } = useBranches();
-
-  const toggleForm = () => {
-    setIsLoginActive(!isLoginActive);
-  };
-
+  const { branches, allsports } = useBranches();
+  console.log(allsports);
   return (
     <div className="text-white">
       {/* Header */}
@@ -157,12 +147,9 @@ export default function LandingPage() {
                     <div className="text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <p className="mb-4">{branch.description}</p>
 
-                      <Link
-                        href={`/salle/preview/${branch.id}`}
-                        className="text-blue-400 border-b border-blue-400 hover:italic"
-                      >
+                      <div className="text-blue-400 border-b border-blue-400 hover:italic">
                         Les sports disponibles →
-                      </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -171,6 +158,21 @@ export default function LandingPage() {
                 </div>
               </Card>
             ))}
+          </div>
+
+          <div>
+            <div className="">
+              <div>
+                <h2 className="text-3xl mt-24 font-bold uppercase text-center mb-12 relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-20 after:h-0.5 after:bg-blue-400 pb-2">
+                  Les Sports disponibles
+                </h2>
+                <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                  {allsports.map((sport) => (
+                    <SportCard key={sport.id} {...sport} />
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
