@@ -6,11 +6,19 @@ import { useBranches } from "@/hooks/useFetchSalles";
 import { SignIn } from "@clerk/nextjs";
 import { Facebook, Instagram, Menu, Signal, Twitter } from "lucide-react";
 import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { ScrollArea } from "../ui/scroll-area";
 import { SportCard } from "./SingularSallePageContent";
 
 export default function LandingPage() {
@@ -125,54 +133,60 @@ export default function LandingPage() {
       </section>
 
       {/* Branches Section */}
-      <section id="branches" className="md:py-16 bg-black p-4 py-12 ">
+      <section id="branches" className="md:py-16 bg-black p-4 py-12">
         <div className="container">
           <h2 className="text-3xl font-bold uppercase text-center mb-12 relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-20 after:h-0.5 after:bg-blue-400 pb-2">
             Les branches disponibles
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
             {branches.map((branch) => (
-              <Card
-                key={branch.id}
-                className="relative overflow-hidden group border-blue-400 border-l-2 p-0"
-              >
-                <div className="relative">
+              <div key={branch.id} className="group relative">
+                <Card className="overflow-hidden rounded-2xl shadow-lg p-0">
+                  {/* Branch image */}
                   <img
-                    src={branch.image || ""}
-                    alt={branch.title || ""}
-                    className="w-full h-64 object-cover"
+                    src={branch.image ?? ""}
+                    alt={branch.title ?? ""}
+                    className="w-full h-64 object-cover object-center"
                   />
-                  <div className="absolute top-0 left-0 w-full h-0 text-white bg-black/70 group-hover:h-full transition-all duration-500 flex items-center justify-center p-6 overflow-hidden">
-                    <div className="text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <p className="mb-4">{branch.description}</p>
 
-                      <div className="text-blue-400 border-b border-blue-400 hover:italic">
-                        Les sports disponibles →
-                      </div>
-                    </div>
+                  {/* Darken overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  {/* Title ribbon */}
+                  <div className="absolute top-4 left-4 bg-gradient-to-r from-blue-500 to-blue-300 text-black font-semibold px-6 py-2 rounded-r-2xl shadow-lg">
+                    {branch.title}
                   </div>
-                </div>
-                <div className="absolute top-0 left-0 w-3/4 bg-gradient-to-r from-blue-400 to-blue-200 text-black p-4 py-12 py-2 clip-path-branch">
-                  {branch.title}
-                </div>
-              </Card>
-            ))}
-          </div>
 
-          <div>
-            <div className="">
-              <div>
-                <h2 className="text-3xl mt-24 font-bold uppercase text-center mb-12 relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-20 after:h-0.5 after:bg-blue-400 pb-2">
-                  Les Sports disponibles
-                </h2>
-                <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                  {allsports.map((sport) => (
-                    <SportCard key={sport.id} {...sport} />
-                  ))}
-                </div>
+                  {/* Dialog trigger button */}
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <button className="absolute bottom-4 right-4 bg-blue-500/80 hover:bg-blue-400 text-white px-4 py-2 rounded-full backdrop-blur-md shadow transition">
+                        Les sports disponibles →
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="min-w-5xl w-full max-h-[80svh]">
+                      <ScrollArea className=" h-[70svh]">
+                        <DialogTitle className=" hidden" />
+                        <h2 className="text-3xl font-bold uppercase text-center mb-8 relative after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-20 after:h-1 after:bg-blue-400 pb-2">
+                          Les Sports disponibles
+                        </h2>
+                        <div className="grid gap-8 md:grid-cols-4 max-w-5xl w-full mx-auto">
+                          {allsports.map((sport) => (
+                            <SportCard key={sport.id} {...sport} />
+                          ))}
+                        </div>
+                        <DialogClose asChild>
+                          <button className="mt-10 mx-auto block px-6 py-2 border border-blue-500 rounded-full hover:bg-blue-50">
+                            Fermer
+                          </button>
+                        </DialogClose>
+                      </ScrollArea>
+                    </DialogContent>
+                  </Dialog>
+                </Card>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -214,7 +228,7 @@ export default function LandingPage() {
             {trainers.map((trainer) => (
               <Card
                 key={trainer.id}
-                className="relative overflow-hidden group border-blue-400 border-l-2 p-0"
+                className="relative overflow-hidden group border-blue-400 border-l-2 p-0 m-0"
               >
                 <div className="relative">
                   <img

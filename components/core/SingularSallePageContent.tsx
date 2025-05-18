@@ -242,7 +242,7 @@ const SingularSallePageContent = ({
             </Button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {allsports.map((sport, i) => (
               <SportCard key={i} {...sport} />
             ))}
@@ -304,7 +304,7 @@ export const SportCard: FC<Sport> = ({
           <img
             src={image}
             alt={title || "Sport image"}
-            className="w-full h-full object-cover"
+            className="w-full h-44  object-cover"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-400">
@@ -354,34 +354,36 @@ export const SportCard: FC<Sport> = ({
             />
           </div>
 
-          <div className=" mt-3">
-            <button
-              onClick={toggleJoin}
-              disabled={toggleLoading || !toggleJoin || (!joined && isFull)}
-              className={`w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg text-white font-medium transition ${
-                joined
-                  ? "bg-red-500 hover:bg-red-600"
-                  : "bg-green-500 hover:bg-green-600"
-              } disabled:opacity-50 disabled:cursor-not-allowed`}
-            >
-              {toggleLoading ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  Processing...
-                </>
-              ) : joined ? (
-                <>
-                  <XCircle className="w-5 h-5" />
-                  Unjoin
-                </>
-              ) : (
-                <>
-                  <CheckCircle className="w-5 h-5" />
-                  Join
-                </>
-              )}
-            </button>
-          </div>
+          <SignedIn>
+            <div className=" mt-3">
+              <button
+                onClick={toggleJoin}
+                disabled={toggleLoading || !toggleJoin || (!joined && isFull)}
+                className={`w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg text-white font-medium transition ${
+                  joined
+                    ? "bg-red-500 hover:bg-red-600"
+                    : "bg-green-500 hover:bg-green-600"
+                } disabled:opacity-50 disabled:cursor-not-allowed`}
+              >
+                {toggleLoading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Processing...
+                  </>
+                ) : joined ? (
+                  <>
+                    <XCircle className="w-5 h-5" />
+                    Unjoin
+                  </>
+                ) : (
+                  <>
+                    <CheckCircle className="w-5 h-5" />
+                    Join
+                  </>
+                )}
+              </button>
+            </div>
+          </SignedIn>
 
           {isFull && !joined && (
             <p className="text-yellow-600 text-xs mt-2 font-medium">
